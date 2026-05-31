@@ -157,11 +157,13 @@ const FT = CARD_T - OFF
 const FR = CARD_L + CARD_W + OFF
 const FB = CARD_T + CARD_H + OFF
 const CX = CARD_L + CARD_W / 2 // centro horizontal
-// rabicho "deitado": medalha no centro inferior e o resto drapeado p/ a direita
+// rabicho "deitado": medalha no centro inferior e o resto drapeado numa curva p/ a direita
 const medalY = FB + 18
+const ctrlX = 372
+const ctrlY = 878
 const crossX = 486
 const crossY = 868
-const tailPath = `M ${CX} ${FB} L ${CX} ${medalY} L ${crossX} ${crossY}`
+const tailPath = `M ${CX} ${FB} L ${CX} ${medalY} Q ${ctrlX} ${ctrlY} ${crossX} ${crossY}`
 
 interface LoopBead {
   x: number
@@ -245,14 +247,14 @@ interface TailBead {
   last: number
 }
 
-// drapeado da medalha (320,800) p/ o crucifixo (486,868):
-// Glória → 3 Ave-Marias → Pai-Nosso, na diagonal "deitada"
+// drapeado em curva da medalha (320,800) p/ o crucifixo (486,868):
+// Glória → 3 Ave-Marias → Pai-Nosso, "deitado" e levemente torto
 const tailBeads: TailBead[] = [
-  { key: 'gloria', x: 348, y: 811, r: 10, kind: 'of', steps: [7], last: 7 },
-  { key: 'ave3', x: 375, y: 823, r: 7, kind: 'hm', steps: [6], last: 6 },
-  { key: 'ave2', x: 403, y: 834, r: 7, kind: 'hm', steps: [5], last: 5 },
-  { key: 'ave1', x: 431, y: 845, r: 7, kind: 'hm', steps: [4], last: 4 },
-  { key: 'painosso', x: 458, y: 857, r: 10, kind: 'of', steps: [3], last: 3 },
+  { key: 'gloria', x: 339, y: 824, r: 10, kind: 'of', steps: [7], last: 7 },
+  { key: 'ave3', x: 363, y: 843, r: 7, kind: 'hm', steps: [6], last: 6 },
+  { key: 'ave2', x: 389, y: 857, r: 7, kind: 'hm', steps: [5], last: 5 },
+  { key: 'ave1', x: 416, y: 865, r: 7, kind: 'hm', steps: [4], last: 4 },
+  { key: 'painosso', x: 447, y: 869, r: 10, kind: 'of', steps: [3], last: 3 },
 ]
 
 type BeadState = 'done' | 'current' | 'todo'
@@ -286,15 +288,15 @@ function tailState(b: TailBead): BeadState {
 
 const crucifixState = computed<BeadState>(() => {
   const i = index.value
-  if (i === 0 || i === 1 || i === 2 || i === 34) return 'current' // Sinal inicial e final
+  if (i === 0 || i === 1 || i === 2 || i === 35) return 'current' // Sinal inicial e final
   if (i > 2) return 'done'
   return 'todo'
 })
 
 const medalState = computed<BeadState>(() => {
   const i = index.value
-  if (i === 33) return 'current' // Salve Rainha
-  if (i >= 34 || (i >= 8 && i < 33)) return 'done'
+  if (i === 33 || i === 34) return 'current' // Salve Rainha + agradecimento
+  if (i >= 35 || (i >= 8 && i < 33)) return 'done'
   return 'todo'
 })
 

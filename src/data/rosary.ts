@@ -12,6 +12,7 @@ type OracaoKey =
   | 'gloria'
   | 'fatima'
   | 'salveRainha'
+  | 'agradecimento'
 
 export const ORACOES: Record<OracaoKey, Oracao> = {
   sinal: {
@@ -52,6 +53,11 @@ export const ORACOES: Record<OracaoKey, Oracao> = {
     titulo: 'Salve Rainha',
     texto:
       'Salve Rainha, Mãe de Misericórdia, vida, doçura e esperança nossa, salve! A vós bradamos, os degredados filhos de Eva; a vós suspiramos, gemendo e chorando neste vale de lágrimas. Eia, pois, advogada nossa, esses vossos olhos misericordiosos a nós volvei; e depois deste desterro, mostrai-nos Jesus, bendito fruto do vosso ventre. Ó clemente, ó piedosa, ó doce Virgem Maria! Rogai por nós, santa Mãe de Deus, para que sejamos dignos das promessas de Cristo. Amém.',
+  },
+  agradecimento: {
+    titulo: 'Oração de Agradecimento',
+    texto:
+      'Infinitas graças vos damos,\nSoberana Rainha,\nPelos benefícios que todos os dias\nRecebemos de vossa mão liberais.\nDignai-vos, agora e para sempre,\nTomar-nos debaixo do vosso poderoso amparo\nE para mais vos obrigar\nVos saudamos com uma Salve Rainha.',
   },
 }
 
@@ -229,6 +235,12 @@ export function buildSequence(key: string): Step[] {
     titulo: ORACOES.salveRainha.titulo,
     subtitulo: 'Conclusão do Terço',
     texto: ORACOES.salveRainha.texto,
+  })
+  steps.push({
+    type: 'prayer',
+    titulo: ORACOES.agradecimento.titulo,
+    subtitulo: 'Ação de graças final',
+    texto: ORACOES.agradecimento.texto,
   })
   steps.push({
     type: 'prayer',
