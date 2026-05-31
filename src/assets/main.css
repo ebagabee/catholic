@@ -743,19 +743,117 @@ footer {
   display: flex;
 }
 
+/* palco: moldura do terço ao redor do card (escala pra caber na viewport) */
+.rosary-stage {
+  position: relative;
+  width: calc(580px * var(--rosary-scale, 1));
+  height: calc(810px * var(--rosary-scale, 1));
+  flex: none;
+}
+.rosary-scene {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 580px;
+  height: 810px;
+  transform: scale(var(--rosary-scale, 1));
+  transform-origin: top left;
+  animation: modalIn 0.22s ease both;
+}
+.rosary-cord {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+  z-index: 2;
+}
+.cord-line {
+  fill: none;
+  stroke: var(--gold-br);
+  stroke-width: 2;
+}
+.bead-dot {
+  fill: var(--surface2);
+  stroke: var(--border);
+  stroke-width: 1;
+  transition:
+    fill 0.25s ease,
+    stroke 0.25s ease;
+}
+.bead-dot.done {
+  fill: var(--gold);
+  stroke: var(--gold);
+}
+.bead-dot.current {
+  fill: var(--gold);
+  stroke: var(--gold);
+  animation: beadPulse 1.4s ease-in-out infinite;
+}
+.bead-dot.of {
+  stroke-width: 1.5;
+}
+.bead-medal {
+  fill: var(--surface);
+  stroke: var(--gold-br);
+  stroke-width: 2;
+  transition: all 0.25s ease;
+}
+.bead-medal.done {
+  fill: var(--gold-bg);
+  stroke: var(--gold);
+}
+.bead-medal.current {
+  fill: var(--gold);
+  stroke: var(--gold);
+  animation: beadPulse 1.4s ease-in-out infinite;
+}
+.crucifix line {
+  stroke: var(--muted);
+  stroke-width: 3;
+  stroke-linecap: round;
+  transition: stroke 0.25s ease;
+}
+.crucifix.done line {
+  stroke: var(--gold);
+}
+.crucifix.current line {
+  stroke: var(--gold);
+  animation: crossPulse 1.4s ease-in-out infinite;
+}
+@keyframes beadPulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.45;
+  }
+}
+@keyframes crossPulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
 .rmodal-card {
   background: var(--bg);
   border: 1px solid var(--gold-br);
   border-radius: 18px;
-  width: 100%;
-  max-width: 560px;
-  height: 640px;
-  max-height: 92vh;
+  position: absolute;
+  top: 60px;
+  left: 50px;
+  width: 480px;
+  height: 520px;
   display: flex;
   flex-direction: column;
   padding: 2rem;
-  position: relative;
-  animation: modalIn 0.22s ease both;
+  z-index: 1;
 }
 .rmodal-scroll {
   flex: 1;
@@ -802,28 +900,6 @@ footer {
   font-size: 0.78rem;
   color: var(--muted);
   margin-bottom: 1.1rem;
-}
-
-.rmodal-progress {
-  display: flex;
-  gap: 4px;
-  flex-wrap: wrap;
-  margin-bottom: 1.5rem;
-}
-.rprog-dot {
-  flex: 1;
-  min-width: 6px;
-  height: 4px;
-  background: var(--surface2);
-  border-radius: 999px;
-  transition: background 0.2s;
-}
-.rprog-dot.done {
-  background: var(--gold);
-}
-.rprog-dot.current {
-  background: var(--gold);
-  opacity: 0.5;
 }
 
 .rmodal-step-type {
