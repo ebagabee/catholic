@@ -7,105 +7,121 @@
   >
     <div class="rosary-stage" v-if="misterio">
       <div class="rosary-scene">
-      <!-- TERÇO (moldura ao redor do card) -->
-      <svg class="rosary-cord" viewBox="0 0 640 900" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-        <!-- cordão: contorna a borda do card -->
-        <rect class="cord-line" :x="FL" :y="FT" :width="FR - FL" :height="FB - FT" :rx="CR" :ry="CR" />
-        <path class="cord-line" :d="tailPath" fill="none" />
+        <!-- TERÇO (moldura ao redor do card) -->
+        <svg
+          class="rosary-cord"
+          viewBox="0 0 640 900"
+          preserveAspectRatio="xMidYMid meet"
+          aria-hidden="true"
+        >
+          <!-- cordão: contorna a borda do card -->
+          <rect
+            class="cord-line"
+            :x="FL"
+            :y="FT"
+            :width="FR - FL"
+            :height="FB - FT"
+            :rx="CR"
+            :ry="CR"
+          />
+          <path class="cord-line" :d="tailPath" fill="none" />
 
-        <!-- laço: 5 dezenas -->
-        <circle
-          v-for="b in loopBeads"
-          :key="'l' + b.decade + '-' + b.sub"
-          :cx="b.x"
-          :cy="b.y"
-          :r="b.r"
-          class="bead-dot"
-          :class="[b.kind, loopState(b.decade, b.sub)]"
-        />
+          <!-- laço: 5 dezenas -->
+          <circle
+            v-for="b in loopBeads"
+            :key="'l' + b.decade + '-' + b.sub"
+            :cx="b.x"
+            :cy="b.y"
+            :r="b.r"
+            class="bead-dot"
+            :class="[b.kind, loopState(b.decade, b.sub)]"
+          />
 
-        <!-- medalha (centro) -->
-        <circle :cx="CX" :cy="medalY" r="14" class="bead-medal" :class="medalState" />
+          <!-- medalha (centro) -->
+          <circle :cx="CX" :cy="medalY" r="14" class="bead-medal" :class="medalState" />
 
-        <!-- rabicho: contas iniciais -->
-        <circle
-          v-for="b in tailBeads"
-          :key="b.key"
-          :cx="b.x"
-          :cy="b.y"
-          :r="b.r"
-          class="bead-dot"
-          :class="[b.kind, tailState(b)]"
-        />
+          <!-- rabicho: contas iniciais -->
+          <circle
+            v-for="b in tailBeads"
+            :key="b.key"
+            :cx="b.x"
+            :cy="b.y"
+            :r="b.r"
+            class="bead-dot"
+            :class="[b.kind, tailState(b)]"
+          />
 
-        <!-- crucifixo -->
-        <g class="crucifix" :class="crucifixState">
-          <line :x1="crossX" :y1="crossY - 16" :x2="crossX" :y2="crossY + 16" />
-          <line :x1="crossX - 11" :y1="crossY - 3" :x2="crossX + 11" :y2="crossY - 3" />
-        </g>
-      </svg>
+          <!-- crucifixo -->
+          <g class="crucifix" :class="crucifixState">
+            <line :x1="crossX" :y1="crossY - 16" :x2="crossX" :y2="crossY + 16" />
+            <line :x1="crossX - 11" :y1="crossY - 3" :x2="crossX + 11" :y2="crossY - 3" />
+          </g>
+        </svg>
 
-      <div class="rmodal-card">
-        <button class="rmodal-close" @click="close">✕</button>
+        <div class="rmodal-card">
+          <button class="rmodal-close" @click="close">✕</button>
 
-        <div class="rmodal-scroll">
-          <p class="rmodal-mystery-name">{{ misterio.icon }} {{ misterio.nome }}</p>
-          <p class="rmodal-step-info">Passo {{ index + 1 }} de {{ steps.length }}</p>
+          <div class="rmodal-scroll">
+            <p class="rmodal-mystery-name">{{ misterio.icon }} {{ misterio.nome }}</p>
+            <p class="rmodal-step-info">Passo {{ index + 1 }} de {{ steps.length }}</p>
 
-          <!-- FINISH -->
-          <div v-if="step.type === 'finish'" class="rmodal-finish">
-            <span class="rmodal-finish-icon">🌹</span>
-            <p class="rmodal-finish-title">{{ step.titulo }}</p>
-            <p class="rmodal-finish-text">
-              Você concluiu o terço dos {{ step.subtitulo }}. Que Nossa Senhora interceda por você.
-            </p>
+            <!-- FINISH -->
+            <div v-if="step.type === 'finish'" class="rmodal-finish">
+              <span class="rmodal-finish-icon">🌹</span>
+              <p class="rmodal-finish-title">{{ step.titulo }}</p>
+              <p class="rmodal-finish-text">
+                Você concluiu o terço dos {{ step.subtitulo }}. Que Nossa Senhora interceda por
+                você.
+              </p>
+            </div>
+
+            <!-- STEP CONTENT -->
+            <template v-else>
+              <p class="rmodal-step-type">{{ stepType }}</p>
+              <p class="rmodal-step-title">{{ step.titulo }}</p>
+              <p v-if="step.subtitulo" class="rmodal-step-sub">{{ step.subtitulo }}</p>
+
+              <!-- MYSTERY ANNOUNCE -->
+              <div v-if="step.type === 'mystery'" class="rmodal-mystery-announce">
+                <p class="rmodal-mystery-num">{{ step.num }}</p>
+                <p class="rmodal-mystery-text">{{ step.texto }}</p>
+              </div>
+
+              <!-- PRAYER / BEADS TEXT -->
+              <div v-else class="rmodal-prayer-text">{{ step.texto }}</div>
+
+              <!-- BEAD COUNTER -->
+              <div v-if="step.type === 'beads'" class="beads-wrap">
+                <div class="beads-label">
+                  <span>Toque cada conta ao rezar</span>
+                  <span>{{ litCount }} / {{ step.count }}</span>
+                </div>
+                <div class="beads-row">
+                  <button
+                    v-for="n in step.count"
+                    :key="n"
+                    class="bead"
+                    :class="{ lit: n <= litCount }"
+                    @click="toggleBead(n)"
+                  >
+                    {{ n }}
+                  </button>
+                </div>
+              </div>
+            </template>
           </div>
 
-          <!-- STEP CONTENT -->
-          <template v-else>
-            <p class="rmodal-step-type">{{ stepType }}</p>
-            <p class="rmodal-step-title">{{ step.titulo }}</p>
-            <p v-if="step.subtitulo" class="rmodal-step-sub">{{ step.subtitulo }}</p>
-
-            <!-- MYSTERY ANNOUNCE -->
-            <div v-if="step.type === 'mystery'" class="rmodal-mystery-announce">
-              <p class="rmodal-mystery-num">{{ step.num }}</p>
-              <p class="rmodal-mystery-text">{{ step.texto }}</p>
-            </div>
-
-            <!-- PRAYER / BEADS TEXT -->
-            <div v-else class="rmodal-prayer-text">{{ step.texto }}</div>
-
-            <!-- BEAD COUNTER -->
-            <div v-if="step.type === 'beads'" class="beads-wrap">
-              <div class="beads-label">
-                <span>Toque cada conta ao rezar</span>
-                <span>{{ litCount }} / {{ step.count }}</span>
-              </div>
-              <div class="beads-row">
-                <button
-                  v-for="n in step.count"
-                  :key="n"
-                  class="bead"
-                  :class="{ lit: n <= litCount }"
-                  @click="toggleBead(n)"
-                >
-                  {{ n }}
-                </button>
-              </div>
-            </div>
-          </template>
+          <!-- NAV -->
+          <div class="rmodal-nav">
+            <button class="rnav-btn rnav-prev" :disabled="index === 0" @click="prev">
+              ← Voltar
+            </button>
+            <button v-if="step.type === 'finish'" class="rnav-btn rnav-next" @click="close">
+              Concluir ✓
+            </button>
+            <button v-else class="rnav-btn rnav-next" @click="next">Avançar →</button>
+          </div>
         </div>
-
-        <!-- NAV -->
-        <div class="rmodal-nav">
-          <button class="rnav-btn rnav-prev" :disabled="index === 0" @click="prev">← Voltar</button>
-          <button v-if="step.type === 'finish'" class="rnav-btn rnav-next" @click="close">
-            Concluir ✓
-          </button>
-          <button v-else class="rnav-btn rnav-next" @click="next">Avançar →</button>
-        </div>
-      </div>
       </div>
     </div>
   </div>
@@ -123,7 +139,9 @@ const litCount = ref(0)
 
 const steps = computed<Step[]>(() => (props.misterioKey ? buildSequence(props.misterioKey) : []))
 const misterio = computed(() => MISTERIOS.find((m) => m.key === props.misterioKey))
-const step = computed<Step>(() => steps.value[index.value] ?? { type: 'finish', titulo: '', subtitulo: '' })
+const step = computed<Step>(
+  () => steps.value[index.value] ?? { type: 'finish', titulo: '', subtitulo: '' },
+)
 
 const stepType = computed(() => {
   switch (step.value.type) {
@@ -309,9 +327,7 @@ function onResize() {
 }
 onMounted(() => window.addEventListener('resize', onResize))
 onUnmounted(() => window.removeEventListener('resize', onResize))
-const rosaryScale = computed(() =>
-  Math.min(1, (winW.value - 64) / 640, (winH.value - 96) / 900),
-)
+const rosaryScale = computed(() => Math.min(1, (winW.value - 64) / 640, (winH.value - 96) / 900))
 
 // reset state whenever a new rosary is opened
 watch(
