@@ -35,12 +35,12 @@ export const ORACOES: Record<OracaoKey, Oracao> = {
   gloria: {
     titulo: 'Glória ao Pai',
     texto:
-      'Glória ao Pai, ao Filho e ao Espírito Santo. Como era no princípio, agora e sempre, pelo mundo afora. Amém.',
+      'Glória ao Pai e ao Filho e ao Espírito Santo. Como era, no princípio, agora e sempre.',
   },
   fatima: {
     titulo: 'Oração de Fátima',
     texto:
-      'Ó meu Jesus, perdoai-nos os nossos pecados, livrai-nos do fogo do inferno, levai as almas todas para o céu, principalmente as que mais precisarem da vossa misericórdia. Amém.',
+      'Ó meu Jesus, perdoai-nos, livrai-nos do fogo do inferno, levai as almas todas para o céu e socorrei principalmente aquelas que mais precisarem.',
   },
   salveRainha: {
     titulo: 'Salve Rainha',
