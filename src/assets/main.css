@@ -540,7 +540,10 @@ footer {
 
 @media (max-width: 560px) {
   .book-grid {
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    grid-template-columns: 1fr;
+  }
+  .book-name {
+    white-space: normal;
   }
   .stats {
     gap: 1.25rem;

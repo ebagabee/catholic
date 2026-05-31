@@ -6,7 +6,9 @@
       <p class="header-sub">Novo Testamento primeiro</p>
       <div class="stats">
         <div class="stat"><span class="stat-n">73</span><span class="stat-l">Livros</span></div>
-        <div class="stat"><span class="stat-n">1.334</span><span class="stat-l">Capítulos</span></div>
+        <div class="stat">
+          <span class="stat-n">1.334</span><span class="stat-l">Capítulos</span>
+        </div>
         <div class="stat"><span class="stat-n">~4</span><span class="stat-l">Caps/dia</span></div>
         <div class="stat"><span class="stat-n">365</span><span class="stat-l">Dias</span></div>
         <div class="stat"><span class="stat-n">12</span><span class="stat-l">Meses</span></div>
@@ -19,7 +21,7 @@
         <p class="method-title">Orientação de leitura</p>
         <p class="method-text">
           <strong>Comece pelo Novo Testamento.</strong> Cristo é a chave de interpretação de toda a
-          Bíblia — conhecê-Lo primeiro ilumina o Antigo Testamento. Leia sempre com o olhar e a
+          Bíblia, conhecê-lo primeiro ilumina o Antigo Testamento. Leia sempre com o olhar e a
           Tradição da Igreja, não isoladamente. Após dominar o NT, o AT revela toda a sua
           profundidade profética e tipológica.
         </p>
@@ -36,20 +38,14 @@
     </div>
 
     <div>
-      <MonthAccordion
-        v-for="m in PLAN"
-        :key="m.mes"
-        :mes="m"
-        :done="done"
-        @toggle="toggleBook"
-      />
+      <MonthAccordion v-for="m in PLAN" :key="m.mes" :mes="m" :done="done" @toggle="toggleBook" />
     </div>
 
     <div class="actions">
       <button class="reset-btn" @click="resetAll">↺ Reiniciar progresso</button>
     </div>
 
-    <footer>"Ignorar as Escrituras é ignorar o próprio Cristo." — São Jerônimo</footer>
+    <footer>"Ignorar as Escrituras é ignorar o próprio Cristo." (São Jerônimo)</footer>
   </div>
 </template>
 

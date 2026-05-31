@@ -25,15 +25,15 @@ export const PLAN: Mes[] = [
   {
     mes: 1,
     label: 'Mês I',
-    nome: 'Novo Testamento — Parte I',
-    subtitulo: 'Os Evangelhos e Atos — comece aqui',
-    desc: 'A tradição recomenda começar pelos Evangelhos. A sequência sugerida é João, Marcos, Lucas, Atos e Mateus — do mais teológico ao mais histórico.',
+    nome: 'Novo Testamento, Parte I',
+    subtitulo: 'Os Evangelhos e Atos, comece aqui',
+    desc: 'A tradição recomenda começar pelos Evangelhos. A sequência sugerida é João, Marcos, Lucas, Atos e Mateus, do mais teológico ao mais histórico.',
     caps_total: 117,
     dias: 30,
     featured: true,
     grupos: [
       {
-        label: 'Evangelhos — ordem recomendada',
+        label: 'Evangelhos na ordem recomendada',
         livros: [
           { nome: 'Evangelho de João', abrev: 'Jo', caps: 21 },
           { nome: 'Evangelho de Marcos', abrev: 'Mc', caps: 16 },
@@ -47,7 +47,7 @@ export const PLAN: Mes[] = [
   {
     mes: 2,
     label: 'Mês II',
-    nome: 'Novo Testamento — Parte II',
+    nome: 'Novo Testamento, Parte II',
     subtitulo: 'As Cartas e o Apocalipse',
     desc: 'Primeiro as cartas curtas de Paulo (mais acessíveis), depois Romanos e Coríntios, e por fim Hebreus, as cartas católicas e o Apocalipse.',
     caps_total: 143,
@@ -103,7 +103,7 @@ export const PLAN: Mes[] = [
     dias: 30,
     grupos: [
       {
-        label: 'Os cinco livros de Moisés — parte I',
+        label: 'Os cinco livros de Moisés, parte I',
         livros: [
           { nome: 'Gênesis', abrev: 'Gn', caps: 50 },
           { nome: 'Êxodo', abrev: 'Ex', caps: 40 },
@@ -195,7 +195,7 @@ export const PLAN: Mes[] = [
     dias: 30,
     grupos: [
       {
-        label: 'Deuterocanônicos — continuação',
+        label: 'Deuterocanônicos, continuação',
         livros: [
           { nome: 'Ester', abrev: 'Est', caps: 16 },
           { nome: '1 Macabeus', abrev: '1Mc', caps: 16 },
@@ -213,7 +213,7 @@ export const PLAN: Mes[] = [
     label: 'Mês VIII',
     nome: 'Salmos I + Provérbios',
     subtitulo: 'A Oração e a Sabedoria Prática',
-    desc: 'Os primeiros 75 Salmos — o livro de oração de Israel e da Igreja. Provérbios complementa com a sabedoria prática do cotidiano à luz de Deus.',
+    desc: 'Os primeiros 75 Salmos, o livro de oração de Israel e da Igreja. Provérbios complementa com a sabedoria prática do cotidiano à luz de Deus.',
     caps_total: 106,
     dias: 30,
     grupos: [
@@ -232,7 +232,7 @@ export const PLAN: Mes[] = [
     label: 'Mês IX',
     nome: 'Salmos II + Sapienciais',
     subtitulo: 'O Amor, o Vazio e a Sabedoria Divina',
-    desc: 'A conclusão dos Salmos, a reflexão sobre a vaidade em Eclesiastes, o amor esponsal no Cântico — figura da relação de Cristo com a Igreja — e a Sabedoria de Salomão.',
+    desc: 'A conclusão dos Salmos, a reflexão sobre a vaidade em Eclesiastes, o amor esponsal no Cântico (figura da relação de Cristo com a Igreja) e a Sabedoria de Salomão.',
     caps_total: 114,
     dias: 30,
     grupos: [
@@ -255,7 +255,7 @@ export const PLAN: Mes[] = [
     label: 'Mês X',
     nome: 'Sirácide e Isaías',
     subtitulo: 'A Sabedoria e o Grande Profeta',
-    desc: "Sirácide (Eclesiástico) encerra os sapienciais com conselhos práticos de fé. Isaías — o 'quinto Evangelho' — anuncia o Servo Sofredor e a Nova Aliança com clareza impressionante.",
+    desc: "Sirácide (Eclesiástico) encerra os sapienciais com conselhos práticos de fé. Isaías, o 'quinto Evangelho', anuncia o Servo Sofredor e a Nova Aliança com clareza impressionante.",
     caps_total: 117,
     dias: 30,
     grupos: [
@@ -274,7 +274,7 @@ export const PLAN: Mes[] = [
     label: 'Mês XI',
     nome: 'Profetas Maiores',
     subtitulo: 'O Exílio e a Esperança',
-    desc: 'Jeremias, Lamentações, Baruc e Ezequiel: a dor do exílio, o choro sobre Jerusalém e as grandes visões da restauração de Israel — tudo iluminado pelo NT que você já leu.',
+    desc: 'Jeremias, Lamentações, Baruc e Ezequiel: a dor do exílio, o choro sobre Jerusalém e as grandes visões da restauração de Israel, tudo iluminado pelo NT que você já leu.',
     caps_total: 111,
     dias: 30,
     grupos: [
@@ -293,7 +293,7 @@ export const PLAN: Mes[] = [
     mes: 12,
     label: 'Mês XII',
     nome: 'Daniel e Profetas Menores',
-    subtitulo: 'A Promessa Cumprida — o Grande Final',
+    subtitulo: 'A Promessa Cumprida, o Grande Final',
     desc: 'Daniel e seus 12 profetas menores: cada promessa, cada imagem, cada chamado à conversão ecoa no Cristo que você conheceu no Mês I. A Bíblia se fecha como um círculo.',
     caps_total: 81,
     dias: 30,

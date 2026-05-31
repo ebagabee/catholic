@@ -2,7 +2,7 @@
   <div class="rosary-section">
     <div class="rosary-header">
       <p class="rosary-title">🌹 Santo Terço</p>
-      <p class="rosary-sub">Guia completo de oração — escolha os mistérios do dia</p>
+      <p class="rosary-sub">Guia completo de oração, escolha os mistérios do dia</p>
       <span class="today-banner">{{ bannerText }}</span>
     </div>
 
