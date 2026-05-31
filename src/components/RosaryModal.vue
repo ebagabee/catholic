@@ -3,61 +3,63 @@
     <div class="rmodal-card" v-if="misterio">
       <button class="rmodal-close" @click="close">✕</button>
 
-      <p class="rmodal-mystery-name">{{ misterio.icon }} {{ misterio.nome }}</p>
-      <p class="rmodal-step-info">Passo {{ index + 1 }} de {{ steps.length }}</p>
+      <div class="rmodal-scroll">
+        <p class="rmodal-mystery-name">{{ misterio.icon }} {{ misterio.nome }}</p>
+        <p class="rmodal-step-info">Passo {{ index + 1 }} de {{ steps.length }}</p>
 
-      <div class="rmodal-progress">
-        <span
-          v-for="(s, i) in steps"
-          :key="i"
-          class="rprog-dot"
-          :class="{ done: i < index, current: i === index }"
-        />
-      </div>
-
-      <!-- FINISH -->
-      <div v-if="step.type === 'finish'" class="rmodal-finish">
-        <span class="rmodal-finish-icon">🌹</span>
-        <p class="rmodal-finish-title">{{ step.titulo }}</p>
-        <p class="rmodal-finish-text">
-          Você concluiu o terço dos {{ step.subtitulo }}. Que Nossa Senhora interceda por você.
-        </p>
-      </div>
-
-      <!-- STEP CONTENT -->
-      <template v-else>
-        <p class="rmodal-step-type">{{ stepType }}</p>
-        <p class="rmodal-step-title">{{ step.titulo }}</p>
-        <p v-if="step.subtitulo" class="rmodal-step-sub">{{ step.subtitulo }}</p>
-
-        <!-- MYSTERY ANNOUNCE -->
-        <div v-if="step.type === 'mystery'" class="rmodal-mystery-announce">
-          <p class="rmodal-mystery-num">{{ step.num }}</p>
-          <p class="rmodal-mystery-text">{{ step.texto }}</p>
+        <div class="rmodal-progress">
+          <span
+            v-for="(s, i) in steps"
+            :key="i"
+            class="rprog-dot"
+            :class="{ done: i < index, current: i === index }"
+          />
         </div>
 
-        <!-- PRAYER / BEADS TEXT -->
-        <div v-else class="rmodal-prayer-text">{{ step.texto }}</div>
-
-        <!-- BEAD COUNTER -->
-        <div v-if="step.type === 'beads'" class="beads-wrap">
-          <div class="beads-label">
-            <span>Toque cada conta ao rezar</span>
-            <span>{{ litCount }} / {{ step.count }}</span>
-          </div>
-          <div class="beads-row">
-            <button
-              v-for="n in step.count"
-              :key="n"
-              class="bead"
-              :class="{ lit: n <= litCount }"
-              @click="toggleBead(n)"
-            >
-              {{ n }}
-            </button>
-          </div>
+        <!-- FINISH -->
+        <div v-if="step.type === 'finish'" class="rmodal-finish">
+          <span class="rmodal-finish-icon">🌹</span>
+          <p class="rmodal-finish-title">{{ step.titulo }}</p>
+          <p class="rmodal-finish-text">
+            Você concluiu o terço dos {{ step.subtitulo }}. Que Nossa Senhora interceda por você.
+          </p>
         </div>
-      </template>
+
+        <!-- STEP CONTENT -->
+        <template v-else>
+          <p class="rmodal-step-type">{{ stepType }}</p>
+          <p class="rmodal-step-title">{{ step.titulo }}</p>
+          <p v-if="step.subtitulo" class="rmodal-step-sub">{{ step.subtitulo }}</p>
+
+          <!-- MYSTERY ANNOUNCE -->
+          <div v-if="step.type === 'mystery'" class="rmodal-mystery-announce">
+            <p class="rmodal-mystery-num">{{ step.num }}</p>
+            <p class="rmodal-mystery-text">{{ step.texto }}</p>
+          </div>
+
+          <!-- PRAYER / BEADS TEXT -->
+          <div v-else class="rmodal-prayer-text">{{ step.texto }}</div>
+
+          <!-- BEAD COUNTER -->
+          <div v-if="step.type === 'beads'" class="beads-wrap">
+            <div class="beads-label">
+              <span>Toque cada conta ao rezar</span>
+              <span>{{ litCount }} / {{ step.count }}</span>
+            </div>
+            <div class="beads-row">
+              <button
+                v-for="n in step.count"
+                :key="n"
+                class="bead"
+                :class="{ lit: n <= litCount }"
+                @click="toggleBead(n)"
+              >
+                {{ n }}
+              </button>
+            </div>
+          </div>
+        </template>
+      </div>
 
       <!-- NAV -->
       <div class="rmodal-nav">

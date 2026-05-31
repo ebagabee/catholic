@@ -709,11 +709,18 @@ footer {
   border-radius: 18px;
   width: 100%;
   max-width: 560px;
+  height: 640px;
   max-height: 92vh;
-  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
   padding: 2rem;
   position: relative;
   animation: modalIn 0.22s ease both;
+}
+.rmodal-scroll {
+  flex: 1;
+  overflow-y: auto;
+  min-height: 0;
 }
 @keyframes modalIn {
   from {
@@ -888,7 +895,9 @@ footer {
   display: flex;
   gap: 10px;
   justify-content: space-between;
-  margin-top: 0.5rem;
+  margin-top: auto;
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--border);
 }
 .rnav-btn {
   font-family: 'Cinzel', serif;
