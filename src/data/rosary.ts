@@ -5,6 +5,7 @@ export interface Oracao {
 
 type OracaoKey =
   | 'sinal'
+  | 'oferecimento'
   | 'credo'
   | 'paiNosso'
   | 'aveMaria'
@@ -16,6 +17,11 @@ export const ORACOES: Record<OracaoKey, Oracao> = {
   sinal: {
     titulo: 'Sinal da Cruz',
     texto: 'Em nome do Pai, e do Filho, e do Espírito Santo. Amém.',
+  },
+  oferecimento: {
+    titulo: 'Oferecimento do Terço',
+    texto:
+      'Divino Jesus,\n\nnós Vos oferecemos este terço que vamos rezar,\nmeditando nos mistérios da Vossa Redenção.\n\nConcedei-nos, por intercessão da Virgem Maria,\nMãe de Deus e nossa Mãe,\nas virtudes que nos são necessárias para bem rezá-lo e\na graça de ganharmos as indulgências desta santa devoção.',
   },
   credo: {
     titulo: 'Creio (Símbolo dos Apóstolos)',
@@ -136,6 +142,12 @@ export function buildSequence(key: string): Step[] {
     titulo: ORACOES.sinal.titulo,
     subtitulo: 'Início do Terço',
     texto: ORACOES.sinal.texto,
+  })
+  steps.push({
+    type: 'prayer',
+    titulo: ORACOES.oferecimento.titulo,
+    subtitulo: 'Oferecimento das orações',
+    texto: ORACOES.oferecimento.texto,
   })
   steps.push({
     type: 'prayer',

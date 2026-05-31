@@ -881,6 +881,7 @@ footer {
   border-radius: 10px;
   padding: 1.1rem 1.3rem;
   margin-bottom: 1.25rem;
+  white-space: pre-line;
 }
 
 /* AVE MARIA BEAD COUNTER */
