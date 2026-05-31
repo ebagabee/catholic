@@ -162,10 +162,21 @@ export function buildSequence(key: string): Step[] {
     texto: ORACOES.paiNosso.texto,
   })
   steps.push({
-    type: 'beads',
+    type: 'prayer',
     titulo: ORACOES.aveMaria.titulo,
-    subtitulo: 'Pela fé, esperança e caridade',
-    count: 3,
+    subtitulo: 'Para aumentar a virtude de nossa fé, rezamos...',
+    texto: ORACOES.aveMaria.texto,
+  })
+  steps.push({
+    type: 'prayer',
+    titulo: ORACOES.aveMaria.titulo,
+    subtitulo: 'Para aumentar a virtude da nossa esperança, rezamos...',
+    texto: ORACOES.aveMaria.texto,
+  })
+  steps.push({
+    type: 'prayer',
+    titulo: ORACOES.aveMaria.titulo,
+    subtitulo: 'Para aumentar a virtude da Caridade, rezamos...',
     texto: ORACOES.aveMaria.texto,
   })
   steps.push({
