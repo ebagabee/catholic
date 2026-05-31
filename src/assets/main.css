@@ -13,6 +13,19 @@
   --border: rgba(43, 29, 14, 0.1);
   --radius: 12px;
 }
+
+[data-theme='dark'] {
+  --bg: #181310;
+  --surface: #221a13;
+  --surface2: #2c2118;
+  --ink: #e8ddd0;
+  --ink2: #b8a892;
+  --muted: #7a6a58;
+  --gold: #c8922a;
+  --gold-bg: rgba(200, 146, 42, 0.15);
+  --gold-br: rgba(200, 146, 42, 0.3);
+  --border: rgba(232, 221, 208, 0.1);
+}
 *,
 *::before,
 *::after {
@@ -414,6 +427,30 @@ footer {
   font-size: 0.82rem;
   color: var(--muted);
   font-style: italic;
+}
+
+.theme-toggle {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 999;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-size: 1rem;
+  color: var(--muted);
+  transition:
+    background 0.2s,
+    border-color 0.2s,
+    color 0.2s;
+  line-height: 1;
+}
+.theme-toggle:hover {
+  background: var(--surface2);
+  border-color: var(--gold-br);
+  color: var(--gold);
 }
 
 /* 12 month color tokens */
