@@ -746,19 +746,19 @@ footer {
 /* palco: moldura do terço ao redor do card (escala pra caber na viewport) */
 .rosary-stage {
   position: relative;
-  width: calc(580px * var(--rosary-scale, 1));
-  height: calc(810px * var(--rosary-scale, 1));
+  width: calc(640px * var(--rosary-scale, 1));
+  height: calc(900px * var(--rosary-scale, 1));
   flex: none;
+  animation: modalIn 0.22s ease both;
 }
 .rosary-scene {
   position: absolute;
   top: 0;
   left: 0;
-  width: 580px;
-  height: 810px;
+  width: 640px;
+  height: 900px;
   transform: scale(var(--rosary-scale, 1));
   transform-origin: top left;
-  animation: modalIn 0.22s ease both;
 }
 .rosary-cord {
   position: absolute;
@@ -848,8 +848,8 @@ footer {
   position: absolute;
   top: 60px;
   left: 50px;
-  width: 480px;
-  height: 520px;
+  width: 540px;
+  height: 700px;
   display: flex;
   flex-direction: column;
   padding: 2rem;

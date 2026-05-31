@@ -8,10 +8,10 @@
     <div class="rosary-stage" v-if="misterio">
       <div class="rosary-scene">
       <!-- TERÇO (moldura ao redor do card) -->
-      <svg class="rosary-cord" viewBox="0 0 580 810" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+      <svg class="rosary-cord" viewBox="0 0 640 900" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
         <!-- cordão: contorna a borda do card -->
         <rect class="cord-line" :x="FL" :y="FT" :width="FR - FL" :height="FB - FT" :rx="CR" :ry="CR" />
-        <line class="cord-line" :x1="CX" :y1="FB" :x2="CX" :y2="crucifixY - 16" />
+        <path class="cord-line" :d="tailPath" fill="none" />
 
         <!-- laço: 5 dezenas -->
         <circle
@@ -40,8 +40,8 @@
 
         <!-- crucifixo -->
         <g class="crucifix" :class="crucifixState">
-          <line :x1="CX" :y1="crucifixY - 16" :x2="CX" :y2="crucifixY + 18" />
-          <line :x1="CX - 12" :y1="crucifixY - 2" :x2="CX + 12" :y2="crucifixY - 2" />
+          <line :x1="crossX" :y1="crossY - 16" :x2="crossX" :y2="crossY + 16" />
+          <line :x1="crossX - 11" :y1="crossY - 3" :x2="crossX + 11" :y2="crossY - 3" />
         </g>
       </svg>
 
@@ -147,8 +147,8 @@ const stepType = computed(() => {
 // card (px, dentro do palco)
 const CARD_L = 50
 const CARD_T = 60
-const CARD_W = 480
-const CARD_H = 520
+const CARD_W = 540
+const CARD_H = 700
 // moldura de contas: contorno deslocado para fora da borda do card
 const OFF = 22
 const CR = 34
@@ -157,8 +157,11 @@ const FT = CARD_T - OFF
 const FR = CARD_L + CARD_W + OFF
 const FB = CARD_T + CARD_H + OFF
 const CX = CARD_L + CARD_W / 2 // centro horizontal
-const medalY = FB + 24
-const crucifixY = 776
+// rabicho "deitado": medalha no centro inferior e o resto drapeado p/ a direita
+const medalY = FB + 18
+const crossX = 486
+const crossY = 868
+const tailPath = `M ${CX} ${FB} L ${CX} ${medalY} L ${crossX} ${crossY}`
 
 interface LoopBead {
   x: number
@@ -242,13 +245,14 @@ interface TailBead {
   last: number
 }
 
-// descendo a partir da medalha: Glória → 3 Ave-Marias → Pai-Nosso → crucifixo
+// drapeado da medalha (320,800) p/ o crucifixo (486,868):
+// Glória → 3 Ave-Marias → Pai-Nosso, na diagonal "deitada"
 const tailBeads: TailBead[] = [
-  { key: 'gloria', x: CX, y: medalY + 26, r: 10, kind: 'of', steps: [7], last: 7 },
-  { key: 'ave3', x: CX, y: medalY + 50, r: 7, kind: 'hm', steps: [6], last: 6 },
-  { key: 'ave2', x: CX, y: medalY + 74, r: 7, kind: 'hm', steps: [5], last: 5 },
-  { key: 'ave1', x: CX, y: medalY + 98, r: 7, kind: 'hm', steps: [4], last: 4 },
-  { key: 'painosso', x: CX, y: medalY + 124, r: 10, kind: 'of', steps: [3], last: 3 },
+  { key: 'gloria', x: 348, y: 811, r: 10, kind: 'of', steps: [7], last: 7 },
+  { key: 'ave3', x: 375, y: 823, r: 7, kind: 'hm', steps: [6], last: 6 },
+  { key: 'ave2', x: 403, y: 834, r: 7, kind: 'hm', steps: [5], last: 5 },
+  { key: 'ave1', x: 431, y: 845, r: 7, kind: 'hm', steps: [4], last: 4 },
+  { key: 'painosso', x: 458, y: 857, r: 10, kind: 'of', steps: [3], last: 3 },
 ]
 
 type BeadState = 'done' | 'current' | 'todo'
@@ -295,8 +299,8 @@ const medalState = computed<BeadState>(() => {
 })
 
 /* escala a cena inteira para caber na viewport (mantém as proporções) */
-const winW = ref(typeof window !== 'undefined' ? window.innerWidth : 580)
-const winH = ref(typeof window !== 'undefined' ? window.innerHeight : 810)
+const winW = ref(typeof window !== 'undefined' ? window.innerWidth : 640)
+const winH = ref(typeof window !== 'undefined' ? window.innerHeight : 900)
 function onResize() {
   winW.value = window.innerWidth
   winH.value = window.innerHeight
@@ -304,7 +308,7 @@ function onResize() {
 onMounted(() => window.addEventListener('resize', onResize))
 onUnmounted(() => window.removeEventListener('resize', onResize))
 const rosaryScale = computed(() =>
-  Math.min(1, (winW.value - 64) / 580, (winH.value - 96) / 810),
+  Math.min(1, (winW.value - 64) / 640, (winH.value - 96) / 900),
 )
 
 // reset state whenever a new rosary is opened
