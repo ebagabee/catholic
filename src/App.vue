@@ -1,11 +1,21 @@
 <template>
-  <h1>You did it!</h1>
-  <p>
-    Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
-    documentation
-  </p>
+  <div class="p-8">
+    <TabComponent :tabs="tabs" default-tab="terco">
+      <template #terco>
+        <p>Conteúdo da aba Rezar o Santo Terço</p>
+      </template>
+      <template #leitura>
+        <p>Conteúdo da aba Rotina de Leitura Diária</p>
+      </template>
+    </TabComponent>
+  </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import TabComponent, { type Tab } from '@/components/TabComponent.vue'
 
-<style scoped></style>
+const tabs: Tab[] = [
+  { id: 'terco', label: 'Rezar o Santo Terço' },
+  { id: 'leitura', label: 'Rotina de Leitura Diária' },
+]
+</script>
