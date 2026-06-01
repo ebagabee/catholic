@@ -661,7 +661,22 @@ footer {
   background: var(--surface2);
 }
 .mystery-card.today-card {
-  border-color: var(--gold-br);
+  border-color: var(--gold);
+  border-width: 2px;
+  background: var(--gold-bg);
+  box-shadow: 0 4px 18px rgba(168, 116, 42, 0.15);
+}
+.mystery-card.today-card .mcard-name {
+  color: var(--gold);
+}
+.mystery-card.today-card .mcard-btn {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: #fff;
+}
+.mystery-card.today-card .mcard-btn:hover {
+  opacity: 0.88;
+  color: #fff;
 }
 .today-pill {
   position: absolute;

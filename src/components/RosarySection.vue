@@ -8,7 +8,7 @@
 
     <div class="mysteries-grid">
       <div
-        v-for="m in MISTERIOS"
+        v-for="m in sortedMisterios"
         :key="m.key"
         class="mystery-card"
         :class="{ 'today-card': todayMisterio?.key === m.key }"
@@ -31,6 +31,14 @@ import { MISTERIOS, misterioDoDia } from '@/data/rosary'
 const emit = defineEmits<{ rezar: [key: string] }>()
 
 const todayMisterio = computed(() => misterioDoDia(new Date().getDay()))
+
+const sortedMisterios = computed(() => {
+  if (!todayMisterio.value) return MISTERIOS
+  return [
+    todayMisterio.value,
+    ...MISTERIOS.filter((m) => m.key !== todayMisterio.value!.key),
+  ]
+})
 
 const bannerText = computed(() =>
   todayMisterio.value
