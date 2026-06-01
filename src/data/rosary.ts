@@ -232,15 +232,15 @@ export function buildSequence(key: string): Step[] {
   // ENCERRAMENTO
   steps.push({
     type: 'prayer',
-    titulo: ORACOES.salveRainha.titulo,
-    subtitulo: 'Conclusão do Terço',
-    texto: ORACOES.salveRainha.texto,
-  })
-  steps.push({
-    type: 'prayer',
     titulo: ORACOES.agradecimento.titulo,
     subtitulo: 'Ação de graças final',
     texto: ORACOES.agradecimento.texto,
+  })
+  steps.push({
+    type: 'prayer',
+    titulo: ORACOES.salveRainha.titulo,
+    subtitulo: 'Conclusão do Terço',
+    texto: ORACOES.salveRainha.texto,
   })
   steps.push({
     type: 'prayer',
