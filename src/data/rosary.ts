@@ -131,6 +131,7 @@ export const MISTERIOS: Misterio[] = [
 
 export type Step =
   | { type: 'prayer'; titulo: string; subtitulo: string; texto: string }
+  | { type: 'intention'; titulo: string; subtitulo: string; texto: string }
   | { type: 'beads'; titulo: string; subtitulo: string; texto: string; count: number }
   | { type: 'mystery'; titulo: string; subtitulo: string; num: string; texto: string }
   | { type: 'finish'; titulo: string; subtitulo: string }
@@ -154,6 +155,12 @@ export function buildSequence(key: string): Step[] {
     titulo: ORACOES.oferecimento.titulo,
     subtitulo: 'Oferecimento das orações',
     texto: ORACOES.oferecimento.texto,
+  })
+  steps.push({
+    type: 'intention',
+    titulo: 'Minha Intenção',
+    subtitulo: 'Ofereça ao Senhor a intenção deste Terço',
+    texto: 'Apresente agora, em silêncio ou em voz alta, a intenção pela qual você está rezando este Terço.\n\nPode ser uma pessoa, uma necessidade, uma graça a pedir ou simplesmente uma ação de graças.',
   })
   steps.push({
     type: 'prayer',

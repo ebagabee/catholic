@@ -149,6 +149,8 @@ const stepType = computed(() => {
       return 'Anúncio do Mistério'
     case 'beads':
       return 'Oração repetida'
+    case 'intention':
+      return 'Intenção Pessoal'
     default:
       return 'Oração'
   }
