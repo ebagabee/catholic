@@ -653,9 +653,15 @@ footer {
 
 .mysteries-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
   margin-bottom: 1rem;
+}
+
+@media (max-width: 560px) {
+  .mysteries-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .mystery-card {
@@ -1688,6 +1694,16 @@ footer {
 .nav-text-short,
 .nav-text-tiny {
   display: none;
+}
+
+@media (min-width: 900px) {
+  .nav-wrapper {
+    max-width: 1100px;
+    gap: 2.5rem;
+  }
+  .top-nav {
+    gap: 2.75rem;
+  }
 }
 
 @media (max-width: 800px) {

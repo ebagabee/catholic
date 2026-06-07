@@ -1,4 +1,5 @@
 <template>
+  <Teleport to="body">
   <div
     class="rosary-modal"
     :class="{ open: !!misterioKey }"
@@ -124,6 +125,7 @@
       </div>
     </div>
   </div>
+  </Teleport>
 </template>
 
 <script setup lang="ts">
