@@ -1120,3 +1120,536 @@ footer {
     padding: 1.5rem 1.25rem;
   }
 }
+
+/* ═══════════════════════════ HEADER NAV ═══════════════════════════ */
+.main-nav-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(250, 246, 239, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 0.75rem 0;
+  transition: background 0.3s, border-color 0.3s;
+}
+
+[data-theme='dark'] .main-nav-header {
+  background: rgba(24, 19, 16, 0.85);
+}
+
+.nav-wrapper {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  user-select: none;
+}
+
+.nav-logo-cross {
+  color: var(--gold);
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.nav-logo-text {
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+  color: var(--ink);
+  text-transform: uppercase;
+}
+
+.top-nav {
+  display: flex;
+  gap: 1.75rem;
+  align-items: center;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: var(--muted);
+  font-family: 'Cinzel', serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 8px 0;
+  position: relative;
+  transition: color 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.nav-link-icon {
+  font-size: 0.9rem;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: var(--gold);
+  transition: width 0.22s ease, left 0.22s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+  left: 0;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--gold);
+}
+
+.nav-theme-toggle {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-size: 1rem;
+  color: var(--muted);
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+  line-height: 1;
+}
+
+.nav-theme-toggle:hover {
+  background: var(--surface2);
+  border-color: var(--gold-br);
+  color: var(--gold);
+}
+
+/* ── Rota transitions ── */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.fade-enter-from {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.fade-leave-to {
+  opacity: 0;
+  transform: translateY(-8px);
+}
+
+/* ═══════════════════════════ BIBLE BOOKS VIEW ═══════════════════════════ */
+.books-header {
+  text-align: center;
+  padding: 3.5rem 0 2.5rem;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 2rem;
+}
+
+.testament-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.testament-btn {
+  font-family: 'Cinzel', serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 8px 18px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.testament-btn:hover {
+  color: var(--ink);
+  border-color: var(--ink2);
+}
+
+.testament-btn.active {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: #fff;
+}
+
+.category-filters {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 2.5rem;
+}
+
+.category-btn {
+  font-family: 'EB Garamond', serif;
+  font-size: 0.88rem;
+  padding: 4px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--ink2);
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.category-btn:hover {
+  border-color: var(--gold-br);
+  background: var(--surface2);
+}
+
+.category-btn.active {
+  background: var(--gold-bg);
+  border-color: var(--gold);
+  color: var(--gold);
+  font-weight: 600;
+}
+
+.books-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 12px;
+  margin-bottom: 3rem;
+}
+
+.book-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.1rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.book-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--gold-br);
+  box-shadow: 0 4px 16px rgba(168, 116, 42, 0.08);
+}
+
+.book-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.6rem;
+}
+
+.book-abrev {
+  font-family: 'Cinzel', serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  line-height: 1;
+}
+
+.book-category-tag {
+  font-size: 0.72rem;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.book-card-body {
+  flex: 1;
+  margin-bottom: 0.6rem;
+}
+
+.book-title {
+  font-family: 'Cinzel', serif;
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: var(--ink);
+  line-height: 1.3;
+}
+
+.book-meta {
+  font-size: 0.76rem;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+.book-card-footer {
+  border-top: 1px solid var(--border);
+  padding-top: 0.4rem;
+  font-size: 0.74rem;
+  color: var(--muted);
+  transition: color 0.15s ease;
+}
+
+.book-card:hover .view-more {
+  color: var(--gold);
+}
+
+.view-more {
+  font-family: 'Cinzel', serif;
+  font-size: 0.68rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  display: block;
+}
+
+/* Category colors */
+.bc-penta { background: #2a58a0; }
+.bc-hist { background: #3d7040; }
+.bc-sapi { background: #9b6e1a; }
+.bc-prof { background: #8a4a18; }
+.bc-evan { background: #802020; }
+.bc-cart { background: #6b50a8; }
+.bc-apoc { background: #2a7a72; }
+.bc-default { background: var(--muted); }
+
+/* ── MODAL LIVROS DA BÍBLIA (EM DESENVOLVIMENTO) ── */
+.books-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 12, 4, 0.78);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1010;
+  padding: 1rem;
+}
+
+.books-modal-content {
+  background: var(--bg);
+  border: 1px solid var(--gold-br);
+  border-radius: 18px;
+  width: 100%;
+  max-width: 480px;
+  padding: 2rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  animation: modalIn 0.22s ease both;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.books-modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: var(--muted);
+  transition: color 0.15s ease;
+  padding: 0 4px;
+}
+
+.books-modal-close:hover {
+  color: var(--ink);
+}
+
+.books-modal-header {
+  text-align: center;
+}
+
+.books-modal-header h2 {
+  font-family: 'Cinzel', serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0.4rem 0;
+}
+
+.book-modal-tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  padding: 3px 12px;
+  border-radius: 999px;
+  color: #fff;
+  font-family: 'Cinzel', serif;
+  letter-spacing: 0.5px;
+}
+
+.quote-box {
+  background: var(--surface);
+  border-left: 3px solid var(--gold);
+  padding: 0.9rem 1.1rem;
+  border-radius: 0 8px 8px 0;
+}
+
+.quote-text {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--ink2);
+}
+
+.quote-author {
+  text-align: right;
+  font-size: 0.76rem;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+.dev-info-box {
+  display: flex;
+  gap: 0.75rem;
+  background: var(--gold-bg);
+  border: 1px solid var(--gold-br);
+  padding: 0.9rem 1.1rem;
+  border-radius: 10px;
+  align-items: flex-start;
+}
+
+.dev-info-icon {
+  font-size: 1.3rem;
+  margin-top: 1px;
+}
+
+.dev-info-title {
+  font-family: 'Cinzel', serif;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 3px;
+}
+
+.dev-info-text {
+  font-family: 'EB Garamond', serif;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: var(--ink2);
+}
+
+.progress-placeholder {
+  margin-top: 0.25rem;
+}
+
+.placeholder-bar-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.76rem;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+.placeholder-bar-track {
+  height: 6px;
+  background: var(--surface2);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.placeholder-bar-fill {
+  width: 0%;
+  height: 100%;
+  background: var(--gold);
+  border-radius: 999px;
+}
+
+.books-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0.25rem;
+}
+
+.books-btn-primary {
+  font-family: 'Cinzel', serif;
+  font-size: 0.72rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 8px 20px;
+  border-radius: 8px;
+  border: 1px solid var(--gold-br);
+  background: var(--gold-bg);
+  color: var(--gold);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  width: 100%;
+}
+
+.books-btn-primary:hover {
+  background: var(--gold);
+  color: #fff;
+  border-color: var(--gold);
+}
+
+/* ═══════════════════════════ RESPONSIVIDADE DO MENU ═══════════════════════════ */
+@media (max-width: 650px) {
+  .nav-wrapper {
+    flex-direction: column;
+    gap: 8px;
+    padding: 0.5rem 1rem;
+  }
+  
+  .nav-logo {
+    margin-bottom: 2px;
+  }
+
+  .top-nav {
+    gap: 1.25rem;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .nav-link {
+    font-size: 0.74rem;
+    letter-spacing: 1px;
+    padding: 6px 0;
+  }
+
+  .nav-theme-toggle {
+    position: fixed;
+    top: 0.5rem;
+    right: 0.5rem;
+    padding: 4px 8px;
+    font-size: 0.88rem;
+    z-index: 110;
+  }
+}
+
+@media (max-width: 480px) {
+  .top-nav {
+    gap: 0.75rem;
+  }
+  
+  .nav-link {
+    font-size: 0.68rem;
+    letter-spacing: 0.5px;
+  }
+  
+  .nav-link-icon {
+    font-size: 0.8rem;
+  }
+  
+  .nav-logo-text {
+    font-size: 1rem;
+  }
+}
+
