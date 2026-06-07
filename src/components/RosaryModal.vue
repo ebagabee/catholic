@@ -131,15 +131,15 @@ import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { getMisterios, buildSequence, type Step } from '@/data/rosary'
 
-const { t } = useI18n()
+const { t, tm } = useI18n()
 const props = defineProps<{ misterioKey: string | null }>()
 const emit = defineEmits<{ close: [] }>()
 
 const index = ref(0)
 const litCount = ref(0)
 
-const steps = computed<Step[]>(() => (props.misterioKey ? buildSequence(props.misterioKey, t) : []))
-const misterio = computed(() => getMisterios(t).find((m) => m.key === props.misterioKey))
+const steps = computed<Step[]>(() => (props.misterioKey ? buildSequence(props.misterioKey, t, tm) : []))
+const misterio = computed(() => getMisterios(t, tm).find((m) => m.key === props.misterioKey))
 const step = computed<Step>(
   () => steps.value[index.value] ?? { type: 'finish', titulo: '', subtitulo: '' },
 )

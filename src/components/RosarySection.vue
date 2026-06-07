@@ -29,13 +29,13 @@ import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { getMisterios, misterioDoDia } from '@/data/rosary'
 
-const { t } = useI18n()
+const { t, tm } = useI18n()
 const emit = defineEmits<{ rezar: [key: string] }>()
 
-const todayMisterio = computed(() => misterioDoDia(new Date().getDay(), t))
+const todayMisterio = computed(() => misterioDoDia(new Date().getDay(), t, tm))
 
 const sortedMisterios = computed(() => {
-  const misterios = getMisterios(t)
+  const misterios = getMisterios(t, tm)
   if (!todayMisterio.value) return misterios
   return [
     todayMisterio.value,

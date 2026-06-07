@@ -7,7 +7,7 @@ export interface Misterio {
   lista: string[]
 }
 
-export function getMisterios(t: any): Misterio[] {
+export function getMisterios(t: any, tm: any): Misterio[] {
   return [
     {
       key: 'gozosos',
@@ -15,7 +15,7 @@ export function getMisterios(t: any): Misterio[] {
       icon: '🌸',
       dias: t('rosary.mysteries.gozosos.days'),
       diasN: [1, 6],
-      lista: t('rosary.mysteries.gozosos.list') as unknown as string[],
+      lista: tm('rosary.mysteries.gozosos.list') as string[],
     },
     {
       key: 'luminosos',
@@ -23,7 +23,7 @@ export function getMisterios(t: any): Misterio[] {
       icon: '✨',
       dias: t('rosary.mysteries.luminosos.days'),
       diasN: [4],
-      lista: t('rosary.mysteries.luminosos.list') as unknown as string[],
+      lista: tm('rosary.mysteries.luminosos.list') as string[],
     },
     {
       key: 'dolorosos',
@@ -31,7 +31,7 @@ export function getMisterios(t: any): Misterio[] {
       icon: '🕊️',
       dias: t('rosary.mysteries.dolorosos.days'),
       diasN: [2, 5],
-      lista: t('rosary.mysteries.dolorosos.list') as unknown as string[],
+      lista: tm('rosary.mysteries.dolorosos.list') as string[],
     },
     {
       key: 'gloriosos',
@@ -39,7 +39,7 @@ export function getMisterios(t: any): Misterio[] {
       icon: '👑',
       dias: t('rosary.mysteries.gloriosos.days'),
       diasN: [0, 3],
-      lista: t('rosary.mysteries.gloriosos.list') as unknown as string[],
+      lista: tm('rosary.mysteries.gloriosos.list') as string[],
     },
   ]
 }
@@ -51,13 +51,13 @@ export type Step =
   | { type: 'mystery'; titulo: string; subtitulo: string; num: string; texto: string }
   | { type: 'finish'; titulo: string; subtitulo: string }
 
-export function buildSequence(key: string, t: any): Step[] {
-  const MISTERIOS = getMisterios(t)
+export function buildSequence(key: string, t: any, tm: any): Step[] {
+  const MISTERIOS = getMisterios(t, tm)
   const m = MISTERIOS.find((x) => x.key === key)
   if (!m) return []
   const steps: Step[] = []
 
-  const ordinais = t('rosary.steps.ordinals') as unknown as string[]
+  const ordinais = tm('rosary.steps.ordinals') as string[]
 
   // ABERTURA
   steps.push({
@@ -180,7 +180,7 @@ export function buildSequence(key: string, t: any): Step[] {
   return steps
 }
 
-export function misterioDoDia(day: number, t: any): Misterio | undefined {
-  const MISTERIOS = getMisterios(t)
+export function misterioDoDia(day: number, t: any, tm: any): Misterio | undefined {
+  const MISTERIOS = getMisterios(t, tm)
   return MISTERIOS.find((m) => m.diasN.includes(day))
 }
