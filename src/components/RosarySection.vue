@@ -1,8 +1,8 @@
 <template>
   <div class="rosary-section">
     <div class="rosary-header">
-      <p class="rosary-title">🌹 Santo Terço</p>
-      <p class="rosary-sub">Guia completo de oração, escolha os mistérios do dia</p>
+      <p class="rosary-title">🌹 {{ $t('nav.rosary') }}</p>
+      <p class="rosary-sub">{{ $t('bibleBooks.subtitle') }}</p> <!-- Reusing subtitle or maybe create a specific one. Actually, let's just leave the translated text or add it to locales -->
       <span class="today-banner">{{ bannerText }}</span>
     </div>
 
@@ -26,23 +26,26 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { MISTERIOS, misterioDoDia } from '@/data/rosary'
+import { useI18n } from 'vue-i18n'
+import { getMisterios, misterioDoDia } from '@/data/rosary'
 
+const { t } = useI18n()
 const emit = defineEmits<{ rezar: [key: string] }>()
 
-const todayMisterio = computed(() => misterioDoDia(new Date().getDay()))
+const todayMisterio = computed(() => misterioDoDia(new Date().getDay(), t))
 
 const sortedMisterios = computed(() => {
-  if (!todayMisterio.value) return MISTERIOS
+  const misterios = getMisterios(t)
+  if (!todayMisterio.value) return misterios
   return [
     todayMisterio.value,
-    ...MISTERIOS.filter((m) => m.key !== todayMisterio.value!.key),
+    ...misterios.filter((m) => m.key !== todayMisterio.value!.key),
   ]
 })
 
 const bannerText = computed(() =>
   todayMisterio.value
-    ? `${todayMisterio.value.icon}  Hoje: ${todayMisterio.value.nome}`
-    : '✝ Escolha os mistérios do dia',
+    ? `${todayMisterio.value.icon}  ${todayMisterio.value.nome}`
+    : '✝ Escolha os mistérios do dia'
 )
 </script>

@@ -2,29 +2,29 @@
   <div class="bible-books-view">
     <header class="books-header">
       <span class="cross">✝</span>
-      <h1>Livros da Bíblia</h1>
-      <p class="header-sub">Coleção completa das Sagradas Escrituras</p>
+      <h1>{{ $t('bibleBooks.title') }}</h1>
+      <p class="header-sub">{{ $t('bibleBooks.subtitle') }}</p>
       
       <div class="stats">
         <div class="stat">
           <span class="stat-n">73</span>
           <span class="stat-l">
-            <span class="stat-text-full">Livros</span>
-            <span class="stat-text-mobile">Livros</span>
+            <span class="stat-text-full">{{ $t('bibleBooks.books') }}</span>
+            <span class="stat-text-mobile">{{ $t('bibleBooks.books') }}</span>
           </span>
         </div>
         <div class="stat">
           <span class="stat-n">46</span>
           <span class="stat-l">
-            <span class="stat-text-full">Antigo Testamento</span>
-            <span class="stat-text-mobile">Antigo Test.</span>
+            <span class="stat-text-full">{{ $t('bibleBooks.oldTestament') }}</span>
+            <span class="stat-text-mobile">{{ $t('bibleBooks.oldTestamentMobile') }}</span>
           </span>
         </div>
         <div class="stat">
           <span class="stat-n">27</span>
           <span class="stat-l">
-            <span class="stat-text-full">Novo Testamento</span>
-            <span class="stat-text-mobile">Novo Test.</span>
+            <span class="stat-text-full">{{ $t('bibleBooks.newTestament') }}</span>
+            <span class="stat-text-mobile">{{ $t('bibleBooks.newTestamentMobile') }}</span>
           </span>
         </div>
       </div>
@@ -53,7 +53,7 @@
         :class="{ active: selectedCategory === cat }"
         @click="selectedCategory = cat"
       >
-        {{ cat }}
+        {{ getCategoryLabel(cat) }}
       </button>
     </div>
 
@@ -69,14 +69,14 @@
           <span class="book-abrev" :class="getCategoryColorClass(book.categoria)">
             {{ book.abrev }}
           </span>
-          <span class="book-category-tag">{{ book.categoria }}</span>
+          <span class="book-category-tag">{{ getCategoryLabel(book.categoria) }}</span>
         </div>
         <div class="book-card-body">
           <p class="book-title">{{ book.nome }}</p>
-          <p class="book-meta">{{ book.caps }} {{ book.caps === 1 ? 'capítulo' : 'capítulos' }}</p>
+          <p class="book-meta">{{ book.caps }} {{ book.caps === 1 ? $t('bibleBooks.chapter') : $t('bibleBooks.chapters') }}</p>
         </div>
         <div class="book-card-footer">
-          <span class="view-more">Ver detalhes →</span>
+          <span class="view-more">{{ $t('bibleBooks.details') }}</span>
         </div>
       </div>
     </div>
@@ -89,32 +89,33 @@
           <span class="cross">✝</span>
           <h2>{{ activeBook.nome }}</h2>
           <span class="book-modal-tag" :class="getCategoryColorClass(activeBook.categoria)">
-            {{ activeBook.categoria }} • {{ activeBook.testamento === 'AT' ? 'Antigo Testamento' : 'Novo Testamento' }}
+            {{ getCategoryLabel(activeBook.categoria) }} • {{ activeBook.testamento === 'AT' ? $t('bibleBooks.oldTestament') : $t('bibleBooks.newTestament') }}
           </span>
         </div>
         
         <div class="books-modal-body">
           <div class="quote-box">
             <p class="quote-text">
-              "A leitura das Sagradas Escrituras é o alimento da alma e a luz para os nossos passos rumo ao Reino dos Céus."
+              {{ $t('bibleBooks.modal.quote') }}
             </p>
-            <p class="quote-author">— Santo Agostinho</p>
+            <p class="quote-author">{{ $t('bibleBooks.modal.quoteAuthor') }}</p>
           </div>
 
           <div class="dev-info-box">
             <div class="dev-info-icon">⚙️</div>
             <div>
-              <p class="dev-info-title">Recurso em Desenvolvimento</p>
+              <p class="dev-info-title">{{ $t('bibleBooks.modal.devTitle') }}</p>
               <p class="dev-info-text">
-                Estamos preparando uma experiência completa de leitura e estudo para o livro de <strong>{{ activeBook.nome }}</strong>.
-                Em breve, você poderá ler todos os seus <strong>{{ activeBook.caps }} capítulos</strong> diretamente por aqui, com comentários patrísticos, notas de estudo e marcação de progresso pessoal.
+                {{ $t('bibleBooks.modal.devText') }} <strong>{{ activeBook.nome }}</strong>.
+                {{ $t('bibleBooks.modal.devText2') }} <strong>{{ activeBook.caps }} {{ $t('bibleBooks.chapters') }}</strong>
+                {{ $t('bibleBooks.modal.devText3') }}
               </p>
             </div>
           </div>
 
           <div class="progress-placeholder">
             <div class="placeholder-bar-label">
-              <span>Capítulos carregados</span>
+              <span>{{ $t('bibleBooks.modal.loaded') }}</span>
               <span>0 / {{ activeBook.caps }} (0%)</span>
             </div>
             <div class="placeholder-bar-track">
@@ -124,7 +125,7 @@
         </div>
 
         <div class="books-modal-footer">
-          <button class="books-btn-primary" @click="closeModal">Entendi</button>
+          <button class="books-btn-primary" @click="closeModal">{{ $t('bibleBooks.modal.gotIt') }}</button>
         </div>
       </div>
     </div>
@@ -133,6 +134,9 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 interface Book {
   nome: string
@@ -146,11 +150,11 @@ const selectedTestament = ref<'ALL' | 'AT' | 'NT'>('ALL')
 const selectedCategory = ref<string>('Todos')
 const activeBook = ref<Book | null>(null)
 
-const testamentTabs = [
-  { label: 'Todos os Livros', labelMobile: 'Todos', value: 'ALL' as const },
-  { label: 'Antigo Testamento', labelMobile: 'Antigo Testamento', value: 'AT' as const },
-  { label: 'Novo Testamento', labelMobile: 'Novo Testamento', value: 'NT' as const }
-]
+const testamentTabs = computed(() => [
+  { label: t('bibleBooks.tabs.all'), labelMobile: t('bibleBooks.tabs.allMobile'), value: 'ALL' as const },
+  { label: t('bibleBooks.tabs.at'), labelMobile: t('bibleBooks.oldTestamentMobile'), value: 'AT' as const },
+  { label: t('bibleBooks.tabs.nt'), labelMobile: t('bibleBooks.newTestamentMobile'), value: 'NT' as const }
+])
 
 const books: Book[] = [
   // Antigo Testamento - Pentateuco
@@ -277,6 +281,20 @@ const filteredBooks = computed(() => {
     return true
   })
 })
+
+function getCategoryLabel(cat: string): string {
+  switch (cat) {
+    case 'Todos': return t('bibleBooks.categories.all')
+    case 'Pentateuco': return t('bibleBooks.categories.penta')
+    case 'Históricos': return t('bibleBooks.categories.hist')
+    case 'Sapienciais': return t('bibleBooks.categories.sapi')
+    case 'Proféticos': return t('bibleBooks.categories.prof')
+    case 'Evangelhos': return t('bibleBooks.categories.evan')
+    case 'Cartas': return t('bibleBooks.categories.cart')
+    case 'Apocalipse': return t('bibleBooks.categories.apoc')
+    default: return cat
+  }
+}
 
 function getCategoryColorClass(cat: string): string {
   switch (cat) {

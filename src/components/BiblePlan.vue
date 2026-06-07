@@ -2,35 +2,30 @@
   <div>
     <header>
       <span class="cross">✝</span>
-      <h1>Bíblia Católica em 1 Ano</h1>
-      <p class="header-sub">Novo Testamento primeiro</p>
-      <div class="stats">
-        <div class="stat"><span class="stat-n">73</span><span class="stat-l">Livros</span></div>
+      <h1>{{ $t('biblePlan.title') }}</h1>
+      <p class="header-sub">{{ $t('biblePlan.subtitle') }}</p>
+      <div class="stats plan-stats">
+        <div class="stat"><span class="stat-n">73</span><span class="stat-l">{{ $t('biblePlan.books') }}</span></div>
         <div class="stat">
-          <span class="stat-n">1.334</span><span class="stat-l">Capítulos</span>
+          <span class="stat-n">1.334</span><span class="stat-l">{{ $t('biblePlan.chapters') }}</span>
         </div>
-        <div class="stat"><span class="stat-n">~4</span><span class="stat-l">Caps/dia</span></div>
-        <div class="stat"><span class="stat-n">365</span><span class="stat-l">Dias</span></div>
-        <div class="stat"><span class="stat-n">12</span><span class="stat-l">Meses</span></div>
+        <div class="stat"><span class="stat-n">~4</span><span class="stat-l">{{ $t('biblePlan.capsPerDay') }}</span></div>
+        <div class="stat"><span class="stat-n">365</span><span class="stat-l">{{ $t('biblePlan.days') }}</span></div>
+        <div class="stat"><span class="stat-n">12</span><span class="stat-l">{{ $t('biblePlan.months') }}</span></div>
       </div>
     </header>
 
     <div class="method-box">
       <div class="method-icon">📖</div>
       <div>
-        <p class="method-title">Orientação de leitura</p>
-        <p class="method-text">
-          <strong>Comece pelo Novo Testamento.</strong> Cristo é a chave de interpretação de toda a
-          Bíblia, conhecê-lo primeiro ilumina o Antigo Testamento. Leia sempre com o olhar e a
-          Tradição da Igreja, não isoladamente. Após dominar o NT, o AT revela toda a sua
-          profundidade profética e tipológica.
-        </p>
+        <p class="method-title">{{ $t('biblePlan.guidanceTitle') }}</p>
+        <p class="method-text" v-html="$t('biblePlan.guidanceText')"></p>
       </div>
     </div>
 
     <div class="overall-bar-wrap">
       <div class="bar-label">
-        <span>Progresso geral</span><span class="bar-pct">{{ overallPct }}%</span>
+        <span>{{ $t('biblePlan.overallProgress') }}</span><span class="bar-pct">{{ overallPct }}%</span>
       </div>
       <div class="bar-track">
         <div class="bar-fill" :style="{ width: overallPct + '%' }" />
@@ -38,21 +33,26 @@
     </div>
 
     <div>
-      <MonthAccordion v-for="m in PLAN" :key="m.mes" :mes="m" :done="done" @toggle="toggleBook" />
+      <MonthAccordion v-for="m in plan" :key="m.mes" :mes="m" :done="done" @toggle="toggleBook" />
     </div>
 
     <div class="actions">
-      <button class="reset-btn" @click="resetAll">↺ Reiniciar progresso</button>
+      <button class="reset-btn" @click="resetAll">{{ $t('biblePlan.reset') }}</button>
     </div>
 
-    <footer>"Ignorar as Escrituras é ignorar o próprio Cristo." (São Jerônimo)</footer>
+    <footer>{{ $t('biblePlan.quote') }}</footer>
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import { PLAN, TOTAL_CAPS, allLivros } from '@/data/biblePlan'
+import { useI18n } from 'vue-i18n'
+import { getPlan, getTotalCaps, allLivros } from '@/data/biblePlan'
 import MonthAccordion from './MonthAccordion.vue'
+
+const { t, locale } = useI18n()
+const plan = computed(() => getPlan(locale.value))
+const totalCaps = computed(() => getTotalCaps(plan.value))
 
 const STORE_KEY = 'biblia_ppr_1ano_v1'
 
@@ -78,15 +78,15 @@ function toggleBook(abrev: string) {
 }
 
 const capsConcluidos = computed(() =>
-  PLAN.flatMap(allLivros)
+  plan.value.flatMap(allLivros)
     .filter((l) => done.value.includes(l.abrev))
     .reduce((s, l) => s + l.caps, 0),
 )
 
-const overallPct = computed(() => Math.round((capsConcluidos.value / TOTAL_CAPS) * 100))
+const overallPct = computed(() => Math.round((capsConcluidos.value / totalCaps.value) * 100))
 
 function resetAll() {
-  if (confirm('Reiniciar todo o progresso?')) {
+  if (confirm(t('biblePlan.resetConfirm'))) {
     done.value = []
     save()
   }

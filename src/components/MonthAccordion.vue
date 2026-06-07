@@ -31,9 +31,9 @@
     <div class="month-body">
       <p class="month-desc">{{ mes.desc }}</p>
       <div class="month-stats">
-        <span>📖 {{ mes.caps_total }} capítulos</span>
-        <span>📅 {{ mes.dias }} dias</span>
-        <span>⏱ ~{{ capsPorDia }} caps/dia</span>
+        <span>📖 {{ mes.caps_total }} {{ $t('biblePlan.chapters').toLowerCase() }}</span>
+        <span>📅 {{ mes.dias }} {{ $t('biblePlan.days').toLowerCase() }}</span>
+        <span>⏱ ~{{ capsPorDia }} {{ $t('biblePlan.capsPerDay').toLowerCase() }}</span>
       </div>
       <div class="mini-bar-wrap">
         <div class="mini-bar-track">
@@ -54,7 +54,7 @@
             <div class="book-check">{{ done.includes(l.abrev) ? '✓' : '' }}</div>
             <div class="book-info">
               <span class="book-name">{{ l.nome }}</span>
-              <span class="book-caps">{{ l.caps }} cap.</span>
+              <span class="book-caps">{{ l.caps }} {{ $t('biblePlan.chapters').slice(0, 3).toLowerCase() }}.</span>
             </div>
           </div>
         </div>

@@ -1,66 +1,3 @@
-export interface Oracao {
-  titulo: string
-  texto: string
-}
-
-type OracaoKey =
-  | 'sinal'
-  | 'oferecimento'
-  | 'credo'
-  | 'paiNosso'
-  | 'aveMaria'
-  | 'gloria'
-  | 'fatima'
-  | 'salveRainha'
-  | 'agradecimento'
-
-export const ORACOES: Record<OracaoKey, Oracao> = {
-  sinal: {
-    titulo: 'Sinal da Cruz',
-    texto: 'Em nome do Pai, e do Filho, e do Espírito Santo. Amém.',
-  },
-  oferecimento: {
-    titulo: 'Oferecimento do Terço',
-    texto:
-      'Divino Jesus,\n\nnós Vos oferecemos este terço que vamos rezar,\nmeditando nos mistérios da Vossa Redenção.\n\nConcedei-nos, por intercessão da Virgem Maria,\nMãe de Deus e nossa Mãe,\nas virtudes que nos são necessárias para bem rezá-lo e\na graça de ganharmos as indulgências desta santa devoção.',
-  },
-  credo: {
-    titulo: 'Creio (Símbolo dos Apóstolos)',
-    texto:
-      'Creio em Deus Pai todo-poderoso, criador do céu e da terra; e em Jesus Cristo, seu único Filho, Nosso Senhor; que foi concebido pelo poder do Espírito Santo; nasceu da Virgem Maria; padeceu sob Pôncio Pilatos; foi crucificado, morto e sepultado; desceu à mansão dos mortos; ressuscitou ao terceiro dia; subiu aos céus; está sentado à direita de Deus Pai todo-poderoso, de onde há de vir a julgar os vivos e os mortos. Creio no Espírito Santo; na Santa Igreja Católica; na comunhão dos santos; na remissão dos pecados; na ressurreição da carne; na vida eterna. Amém.',
-  },
-  paiNosso: {
-    titulo: 'Pai Nosso',
-    texto:
-      'Pai nosso que estais no céu, santificado seja o vosso nome; venha a nós o vosso reino; seja feita a vossa vontade assim na terra como no céu. O pão nosso de cada dia nos dai hoje; perdoai-nos as nossas ofensas, assim como nós perdoamos a quem nos tem ofendido; e não nos deixeis cair em tentação; mas livrai-nos do mal. Amém.',
-  },
-  aveMaria: {
-    titulo: 'Ave Maria',
-    texto:
-      'Ave Maria, cheia de graça, o Senhor é convosco; bendita sois vós entre as mulheres, e bendito é o fruto do vosso ventre, Jesus. Santa Maria, Mãe de Deus, rogai por nós pecadores, agora e na hora de nossa morte. Amém.',
-  },
-  gloria: {
-    titulo: 'Glória ao Pai',
-    texto:
-      'Glória ao Pai e ao Filho e ao Espírito Santo. Como era, no princípio, agora e sempre.',
-  },
-  fatima: {
-    titulo: 'Oração de Fátima',
-    texto:
-      'Ó meu Jesus, perdoai-nos, livrai-nos do fogo do inferno, levai as almas todas para o céu e socorrei principalmente aquelas que mais precisarem.',
-  },
-  salveRainha: {
-    titulo: 'Salve Rainha',
-    texto:
-      'Salve Rainha, Mãe de Misericórdia, vida, doçura e esperança nossa, salve! A vós bradamos, os degredados filhos de Eva; a vós suspiramos, gemendo e chorando neste vale de lágrimas. Eia, pois, advogada nossa, esses vossos olhos misericordiosos a nós volvei; e depois deste desterro, mostrai-nos Jesus, bendito fruto do vosso ventre. Ó clemente, ó piedosa, ó doce Virgem Maria! Rogai por nós, santa Mãe de Deus, para que sejamos dignos das promessas de Cristo. Amém.',
-  },
-  agradecimento: {
-    titulo: 'Oração de Agradecimento',
-    texto:
-      'Infinitas graças vos damos,\nSoberana Rainha,\nPelos benefícios que todos os dias\nRecebemos de vossa mão liberais.\nDignai-vos, agora e para sempre,\nTomar-nos debaixo do vosso poderoso amparo\nE para mais vos obrigar\nVos saudamos com uma Salve Rainha.',
-  },
-}
-
 export interface Misterio {
   key: string
   nome: string
@@ -70,64 +7,42 @@ export interface Misterio {
   lista: string[]
 }
 
-export const MISTERIOS: Misterio[] = [
-  {
-    key: 'gozosos',
-    nome: 'Mistérios Gozosos',
-    icon: '🌸',
-    dias: 'Segunda-feira e Sábado',
-    diasN: [1, 6],
-    lista: [
-      'A Anunciação do Anjo Gabriel a Maria',
-      'A Visitação de Nossa Senhora a Santa Isabel',
-      'O Nascimento de Jesus em Belém',
-      'A Apresentação de Jesus no Templo',
-      'O Encontro de Jesus no Templo aos Doze Anos',
-    ],
-  },
-  {
-    key: 'luminosos',
-    nome: 'Mistérios Luminosos',
-    icon: '✨',
-    dias: 'Quinta-feira',
-    diasN: [4],
-    lista: [
-      'O Batismo de Jesus no Jordão',
-      'As Bodas de Caná',
-      'O Anúncio do Reino de Deus e o Chamado à Conversão',
-      'A Transfiguração de Jesus no Monte Tabor',
-      'A Instituição da Eucaristia',
-    ],
-  },
-  {
-    key: 'dolorosos',
-    nome: 'Mistérios Dolorosos',
-    icon: '🕊️',
-    dias: 'Terça-feira e Sexta-feira',
-    diasN: [2, 5],
-    lista: [
-      'A Agonia de Jesus no Horto das Oliveiras',
-      'A Flagelação de Jesus à Coluna',
-      'A Coroação de Espinhos',
-      'Jesus Carrega a Cruz até o Calvário',
-      'A Crucificação e Morte de Jesus',
-    ],
-  },
-  {
-    key: 'gloriosos',
-    nome: 'Mistérios Gloriosos',
-    icon: '👑',
-    dias: 'Quarta-feira e Domingo',
-    diasN: [0, 3],
-    lista: [
-      'A Ressurreição de Jesus Cristo',
-      'A Ascensão de Jesus ao Céu',
-      'A Descida do Espírito Santo sobre os Apóstolos',
-      'A Assunção de Nossa Senhora ao Céu',
-      'A Coroação de Nossa Senhora como Rainha do Céu e da Terra',
-    ],
-  },
-]
+export function getMisterios(t: any): Misterio[] {
+  return [
+    {
+      key: 'gozosos',
+      nome: t('rosary.mysteries.gozosos.name'),
+      icon: '🌸',
+      dias: t('rosary.mysteries.gozosos.days'),
+      diasN: [1, 6],
+      lista: t('rosary.mysteries.gozosos.list') as unknown as string[],
+    },
+    {
+      key: 'luminosos',
+      nome: t('rosary.mysteries.luminosos.name'),
+      icon: '✨',
+      dias: t('rosary.mysteries.luminosos.days'),
+      diasN: [4],
+      lista: t('rosary.mysteries.luminosos.list') as unknown as string[],
+    },
+    {
+      key: 'dolorosos',
+      nome: t('rosary.mysteries.dolorosos.name'),
+      icon: '🕊️',
+      dias: t('rosary.mysteries.dolorosos.days'),
+      diasN: [2, 5],
+      lista: t('rosary.mysteries.dolorosos.list') as unknown as string[],
+    },
+    {
+      key: 'gloriosos',
+      nome: t('rosary.mysteries.gloriosos.name'),
+      icon: '👑',
+      dias: t('rosary.mysteries.gloriosos.days'),
+      diasN: [0, 3],
+      lista: t('rosary.mysteries.gloriosos.list') as unknown as string[],
+    },
+  ]
+}
 
 export type Step =
   | { type: 'prayer'; titulo: string; subtitulo: string; texto: string }
@@ -136,134 +51,136 @@ export type Step =
   | { type: 'mystery'; titulo: string; subtitulo: string; num: string; texto: string }
   | { type: 'finish'; titulo: string; subtitulo: string }
 
-const ORDINAIS = ['1º', '2º', '3º', '4º', '5º']
-
-export function buildSequence(key: string): Step[] {
+export function buildSequence(key: string, t: any): Step[] {
+  const MISTERIOS = getMisterios(t)
   const m = MISTERIOS.find((x) => x.key === key)
   if (!m) return []
   const steps: Step[] = []
 
+  const ordinais = t('rosary.steps.ordinals') as unknown as string[]
+
   // ABERTURA
   steps.push({
     type: 'prayer',
-    titulo: ORACOES.sinal.titulo,
-    subtitulo: 'Início do Terço',
-    texto: ORACOES.sinal.texto,
+    titulo: t('rosary.prayers.sinal.title'),
+    subtitulo: t('rosary.steps.start'),
+    texto: t('rosary.prayers.sinal.text'),
   })
   steps.push({
     type: 'prayer',
-    titulo: ORACOES.oferecimento.titulo,
-    subtitulo: 'Oferecimento das orações',
-    texto: ORACOES.oferecimento.texto,
+    titulo: t('rosary.prayers.oferecimento.title'),
+    subtitulo: t('rosary.steps.offering'),
+    texto: t('rosary.prayers.oferecimento.text'),
   })
   steps.push({
     type: 'intention',
-    titulo: 'Minha Intenção',
-    subtitulo: 'Ofereça ao Senhor a intenção deste Terço',
-    texto: 'Apresente agora, em silêncio ou em voz alta, a intenção pela qual você está rezando este Terço.\n\nPode ser uma pessoa, uma necessidade, uma graça a pedir ou simplesmente uma ação de graças.',
+    titulo: t('rosary.steps.intentionTitle'),
+    subtitulo: t('rosary.steps.intentionSub'),
+    texto: t('rosary.steps.intentionText'),
   })
   steps.push({
     type: 'prayer',
-    titulo: ORACOES.credo.titulo,
-    subtitulo: 'Profissão de fé',
-    texto: ORACOES.credo.texto,
+    titulo: t('rosary.prayers.credo.title'),
+    subtitulo: t('rosary.steps.creed'),
+    texto: t('rosary.prayers.credo.text'),
   })
   steps.push({
     type: 'prayer',
-    titulo: ORACOES.paiNosso.titulo,
-    subtitulo: 'Pelas intenções do Santo Padre',
-    texto: ORACOES.paiNosso.texto,
+    titulo: t('rosary.prayers.paiNosso.title'),
+    subtitulo: t('rosary.steps.pope'),
+    texto: t('rosary.prayers.paiNosso.text'),
   })
   steps.push({
     type: 'prayer',
-    titulo: ORACOES.aveMaria.titulo,
-    subtitulo: 'Para aumentar a virtude de nossa fé, rezamos...',
-    texto: ORACOES.aveMaria.texto,
+    titulo: t('rosary.prayers.aveMaria.title'),
+    subtitulo: t('rosary.steps.faith'),
+    texto: t('rosary.prayers.aveMaria.text'),
   })
   steps.push({
     type: 'prayer',
-    titulo: ORACOES.aveMaria.titulo,
-    subtitulo: 'Para aumentar a virtude da nossa esperança, rezamos...',
-    texto: ORACOES.aveMaria.texto,
+    titulo: t('rosary.prayers.aveMaria.title'),
+    subtitulo: t('rosary.steps.hope'),
+    texto: t('rosary.prayers.aveMaria.text'),
   })
   steps.push({
     type: 'prayer',
-    titulo: ORACOES.aveMaria.titulo,
-    subtitulo: 'Para aumentar a virtude da Caridade, rezamos...',
-    texto: ORACOES.aveMaria.texto,
+    titulo: t('rosary.prayers.aveMaria.title'),
+    subtitulo: t('rosary.steps.charity'),
+    texto: t('rosary.prayers.aveMaria.text'),
   })
   steps.push({
     type: 'prayer',
-    titulo: ORACOES.gloria.titulo,
+    titulo: t('rosary.prayers.gloria.title'),
     subtitulo: '',
-    texto: ORACOES.gloria.texto,
+    texto: t('rosary.prayers.gloria.text'),
   })
 
   // 5 MISTÉRIOS
   m.lista.forEach((misterio, i) => {
-    const ordinal = ORDINAIS[i]
+    const ordinal = ordinais[i] || `${i + 1}º`
     steps.push({
       type: 'mystery',
-      titulo: `${ordinal} Mistério`,
+      titulo: `${ordinal} ${t('rosary.steps.mysteryPrefix')}`,
       subtitulo: m.nome,
-      num: `${ordinal} Mistério ${m.nome}`,
+      num: `${ordinal} ${t('rosary.steps.mysteryPrefix')} ${m.nome}`,
       texto: misterio,
     })
     steps.push({
       type: 'prayer',
-      titulo: ORACOES.paiNosso.titulo,
+      titulo: t('rosary.prayers.paiNosso.title'),
       subtitulo: '',
-      texto: ORACOES.paiNosso.texto,
+      texto: t('rosary.prayers.paiNosso.text'),
     })
     steps.push({
       type: 'beads',
-      titulo: ORACOES.aveMaria.titulo,
-      subtitulo: `${ordinal} dezena`,
+      titulo: t('rosary.prayers.aveMaria.title'),
+      subtitulo: `${ordinal} ${t('rosary.steps.decade')}`,
       count: 10,
-      texto: ORACOES.aveMaria.texto,
+      texto: t('rosary.prayers.aveMaria.text'),
     })
     steps.push({
       type: 'prayer',
-      titulo: ORACOES.gloria.titulo,
+      titulo: t('rosary.prayers.gloria.title'),
       subtitulo: '',
-      texto: ORACOES.gloria.texto,
+      texto: t('rosary.prayers.gloria.text'),
     })
     steps.push({
       type: 'prayer',
-      titulo: ORACOES.fatima.titulo,
-      subtitulo: 'Oração ensinada em Fátima',
-      texto: ORACOES.fatima.texto,
+      titulo: t('rosary.prayers.fatima.title'),
+      subtitulo: t('rosary.steps.fatimaSub'),
+      texto: t('rosary.prayers.fatima.text'),
     })
   })
 
   // ENCERRAMENTO
   steps.push({
     type: 'prayer',
-    titulo: ORACOES.agradecimento.titulo,
-    subtitulo: 'Ação de graças final',
-    texto: ORACOES.agradecimento.texto,
+    titulo: t('rosary.prayers.agradecimento.title'),
+    subtitulo: t('rosary.steps.thanks'),
+    texto: t('rosary.prayers.agradecimento.text'),
   })
   steps.push({
     type: 'prayer',
-    titulo: ORACOES.salveRainha.titulo,
-    subtitulo: 'Conclusão do Terço',
-    texto: ORACOES.salveRainha.texto,
+    titulo: t('rosary.prayers.salveRainha.title'),
+    subtitulo: t('rosary.steps.conclusion'),
+    texto: t('rosary.prayers.salveRainha.text'),
   })
   steps.push({
     type: 'prayer',
-    titulo: ORACOES.sinal.titulo,
-    subtitulo: 'Sinal final',
-    texto: ORACOES.sinal.texto,
+    titulo: t('rosary.prayers.sinal.title'),
+    subtitulo: t('rosary.steps.finalSign'),
+    texto: t('rosary.prayers.sinal.text'),
   })
   steps.push({
     type: 'finish',
-    titulo: 'Terço Concluído',
+    titulo: t('rosary.steps.finish'),
     subtitulo: m.nome,
   })
 
   return steps
 }
 
-export function misterioDoDia(day: number): Misterio | undefined {
+export function misterioDoDia(day: number, t: any): Misterio | undefined {
+  const MISTERIOS = getMisterios(t)
   return MISTERIOS.find((m) => m.diasN.includes(day))
 }

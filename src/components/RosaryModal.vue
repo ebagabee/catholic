@@ -63,15 +63,14 @@
 
           <div class="rmodal-scroll">
             <p class="rmodal-mystery-name">{{ misterio.icon }} {{ misterio.nome }}</p>
-            <p class="rmodal-step-info">Passo {{ index + 1 }} de {{ steps.length }}</p>
+            <p class="rmodal-step-info">{{ $t('rosaryModal.stepInfo', { current: index + 1, total: steps.length }) }}</p>
 
             <!-- FINISH -->
             <div v-if="step.type === 'finish'" class="rmodal-finish">
               <span class="rmodal-finish-icon">🌹</span>
               <p class="rmodal-finish-title">{{ step.titulo }}</p>
               <p class="rmodal-finish-text">
-                Você concluiu o terço dos {{ step.subtitulo }}. Que Nossa Senhora interceda por
-                você.
+                {{ $t('rosaryModal.finishText', { mystery: step.subtitulo }) }}
               </p>
             </div>
 
@@ -93,7 +92,7 @@
               <!-- BEAD COUNTER -->
               <div v-if="step.type === 'beads'" class="beads-wrap">
                 <div class="beads-label">
-                  <span>Toque cada conta ao rezar</span>
+                  <span>{{ $t('rosaryModal.touchBead') }}</span>
                   <span>{{ litCount }} / {{ step.count }}</span>
                 </div>
                 <div class="beads-row">
@@ -114,12 +113,12 @@
           <!-- NAV -->
           <div class="rmodal-nav">
             <button class="rnav-btn rnav-prev" :disabled="index === 0" @click="prev">
-              ← Voltar
+              {{ $t('rosaryModal.prev') }}
             </button>
             <button v-if="step.type === 'finish'" class="rnav-btn rnav-next" @click="close">
-              Concluir ✓
+              {{ $t('rosaryModal.finishBtn') }}
             </button>
-            <button v-else class="rnav-btn rnav-next" @click="next">Avançar →</button>
+            <button v-else class="rnav-btn rnav-next" @click="next">{{ $t('rosaryModal.next') }}</button>
           </div>
         </div>
       </div>
@@ -129,16 +128,18 @@
 
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
-import { MISTERIOS, buildSequence, type Step } from '@/data/rosary'
+import { useI18n } from 'vue-i18n'
+import { getMisterios, buildSequence, type Step } from '@/data/rosary'
 
+const { t } = useI18n()
 const props = defineProps<{ misterioKey: string | null }>()
 const emit = defineEmits<{ close: [] }>()
 
 const index = ref(0)
 const litCount = ref(0)
 
-const steps = computed<Step[]>(() => (props.misterioKey ? buildSequence(props.misterioKey) : []))
-const misterio = computed(() => MISTERIOS.find((m) => m.key === props.misterioKey))
+const steps = computed<Step[]>(() => (props.misterioKey ? buildSequence(props.misterioKey, t) : []))
+const misterio = computed(() => getMisterios(t).find((m) => m.key === props.misterioKey))
 const step = computed<Step>(
   () => steps.value[index.value] ?? { type: 'finish', titulo: '', subtitulo: '' },
 )
@@ -146,13 +147,13 @@ const step = computed<Step>(
 const stepType = computed(() => {
   switch (step.value.type) {
     case 'mystery':
-      return 'Anúncio do Mistério'
+      return t('rosaryModal.types.mystery')
     case 'beads':
-      return 'Oração repetida'
+      return t('rosaryModal.types.beads')
     case 'intention':
-      return 'Intenção Pessoal'
+      return t('rosaryModal.types.intention')
     default:
-      return 'Oração'
+      return t('rosaryModal.types.prayer')
   }
 })
 
