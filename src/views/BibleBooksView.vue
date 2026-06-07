@@ -6,9 +6,27 @@
       <p class="header-sub">Coleção completa das Sagradas Escrituras</p>
       
       <div class="stats">
-        <div class="stat"><span class="stat-n">73</span><span class="stat-l">Livros</span></div>
-        <div class="stat"><span class="stat-n">46</span><span class="stat-l">Antigo Testamento</span></div>
-        <div class="stat"><span class="stat-n">27</span><span class="stat-l">Novo Testamento</span></div>
+        <div class="stat">
+          <span class="stat-n">73</span>
+          <span class="stat-l">
+            <span class="stat-text-full">Livros</span>
+            <span class="stat-text-mobile">Livros</span>
+          </span>
+        </div>
+        <div class="stat">
+          <span class="stat-n">46</span>
+          <span class="stat-l">
+            <span class="stat-text-full">Antigo Testamento</span>
+            <span class="stat-text-mobile">Antigo Test.</span>
+          </span>
+        </div>
+        <div class="stat">
+          <span class="stat-n">27</span>
+          <span class="stat-l">
+            <span class="stat-text-full">Novo Testamento</span>
+            <span class="stat-text-mobile">Novo Test.</span>
+          </span>
+        </div>
       </div>
     </header>
 
@@ -21,7 +39,8 @@
         :class="{ active: selectedTestament === tab.value }"
         @click="selectTestament(tab.value)"
       >
-        {{ tab.label }}
+        <span class="tab-text-full">{{ tab.label }}</span>
+        <span class="tab-text-mobile">{{ tab.labelMobile }}</span>
       </button>
     </div>
 
@@ -128,9 +147,9 @@ const selectedCategory = ref<string>('Todos')
 const activeBook = ref<Book | null>(null)
 
 const testamentTabs = [
-  { label: 'Todos os Livros', value: 'ALL' as const },
-  { label: 'Antigo Testamento', value: 'AT' as const },
-  { label: 'Novo Testamento', value: 'NT' as const }
+  { label: 'Todos os Livros', labelMobile: 'Todos', value: 'ALL' as const },
+  { label: 'Antigo Testamento', labelMobile: 'Antigo Testamento', value: 'AT' as const },
+  { label: 'Novo Testamento', labelMobile: 'Novo Testamento', value: 'NT' as const }
 ]
 
 const books: Book[] = [

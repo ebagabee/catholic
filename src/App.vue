@@ -9,15 +9,27 @@
       <nav class="top-nav">
         <router-link to="/" class="nav-link" exact-active-class="active">
           <span class="nav-link-icon">🌹</span>
-          <span class="nav-link-text">Santo Terço</span>
+          <span class="nav-link-text">
+            <span class="nav-text-full">Oração do Santo Terço</span>
+            <span class="nav-text-short">Santo Terço</span>
+            <span class="nav-text-tiny">Terço</span>
+          </span>
         </router-link>
         <router-link to="/biblia-1-ano" class="nav-link" active-class="active">
           <span class="nav-link-icon">📖</span>
-          <span class="nav-link-text">Bíblia em 1 Ano</span>
+          <span class="nav-link-text">
+            <span class="nav-text-full">Bíblia em 1 Ano</span>
+            <span class="nav-text-short">Bíblia 1 Ano</span>
+            <span class="nav-text-tiny">Plano</span>
+          </span>
         </router-link>
         <router-link to="/livros" class="nav-link" active-class="active">
           <span class="nav-link-icon">📜</span>
-          <span class="nav-link-text">Livros da Bíblia</span>
+          <span class="nav-link-text">
+            <span class="nav-text-full">Livros da Bíblia</span>
+            <span class="nav-text-short">Livros</span>
+            <span class="nav-text-tiny">Livros</span>
+          </span>
         </router-link>
       </nav>
 
